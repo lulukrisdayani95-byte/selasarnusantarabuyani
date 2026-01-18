@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Selasar Nusantara | Cita Rasa Warisan Leluhur</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+:root{
+  --bg:#ffffff;
+  --card:#ffffff;
+  --text:#222;
+  --muted:#666;
+  --accent:#b58e3e; /* Emas tembaga yang lebih mewah */
+  --nav:rgba(255,255,255,0.95);
+  --dark-bg: #1a1a1a;
+}
+body.dark{
+  --bg:#121212;
+  --card:#1e1e1e;
+  --text:#eee;
+  --muted:#aaa;
+  --nav:rgba(18,18,18,0.95);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:.4s;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+}
+
+/* ===== NAVBAR ===== */
+nav{
+  position:fixed;
+  top:0;left:0;
+  width:100%;
+  padding:20px 80px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:transparent;
+  z-index:1000;
+  transition:.4s;
+}
+nav.scrolled{
+    background:var(--nav);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 12px 80px;
+}
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.logo-icon {
+    width: 45px;
+    height: 45px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: white;
+    font-size: 24px;
+}
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: 1px;
+    color: var(--text);
+}
+nav.scrolled .logo-text { color: var(--text); }
+.links a{
+  color: inherit;
+  text-decoration:none;
+  margin-left:30px;
+  font-weight:500;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: relative;
+}
+/* Link Hover Effect */
+.links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent);
+    transition: 0.3s;
+}
+.links a:hover::after { width: 100%; }
+
+/* ===== HERO ===== */
+.hero{
+  height:100vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  padding: 0 10%;
+  color:#fff;
+  background:#000;
+}
+.hero-bg{
+  position:absolute;
+  inset:0;
+  background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.2)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=2070');
+  background-size:cover;
+  background-position:center;
+}
+.hero-content{ position:relative; z-index: 10; max-width: 700px; }
+.hero-content h1{ font-family:'Playfair Display',serif; font-size: 72px; line-height: 1.1; margin: 10px 0; }
+.hero-content p { font-size: 16px; color: #ddd; margin-bottom: 30px; }
+
+/* ===== ABOUT SECTION ===== */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+.about-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 20px 20px 0 var(--accent);
+    transition: 0.5s;
+}
+.about-image img:hover { transform: scale(1.02); }
+.about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+.about-text p {
+    color: var(--muted);
+    margin-bottom: 15px;
+}
+
+/* ===== MENU SECTION ===== */
+.section-title { text-align: center; margin-bottom: 60px; }
+.section-title h2 { font-family: 'Playfair Display', serif; font-size: 48px; margin-bottom: 10px; }
+.section-title .line { width: 80px; height: 3px; background: var(--accent); margin: 0 auto; }
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+.menu-card {
+    background: var(--card);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    cursor: pointer;
+}
+.menu-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+.menu-img { height: 220px; width: 100%; object-fit: cover; transition: 0.5s; }
+.menu-card:hover .menu-img { transform: scale(1.1); }
+.menu-info { padding: 25px; }
+.menu-info h3 { font-family: 'Playfair Display', serif; font-size: 24px; margin: 0 0 10px 0; }
+.menu-info p { font-size: 14px; color: var(--muted); margin-bottom: 20px; height: 60px; overflow: hidden; }
+.menu-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #eee; padding-top: 15px; }
+.price { color: var(--accent); font-weight: 700; font-size: 18px; }
+
+/* MODAL MENU STYLES */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    padding: 20px;
+}
+.modal-content {
+    background: var(--bg);
+    max-width: 500px;
+    width: 100%;
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    animation: modalScale 0.3s ease-out;
+}
+@keyframes modalScale {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+.modal-body img { width: 100%; height: 300px; object-fit: cover; }
+.modal-details { padding: 30px; text-align: center; }
+.modal-details h3 { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 10px; }
+.modal-details .price { display: block; margin-bottom: 15px; font-size: 22px; }
+
+/* ===== GALLERY SECTION ===== */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+.gallery-item {
+    height: 250px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+    cursor: pointer;
+}
+.gallery-item:hover img { transform: scale(1.1) rotate(2deg); filter: brightness(70%); }
+
+/* ===== TESTIMONIALS ===== */
+.testi-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+.testi-card {
+    background: #fdfcf8;
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    border-bottom: 4px solid var(--accent);
+}
+.testi-card i { color: var(--accent); font-size: 30px; margin-bottom: 20px; }
+.testi-card p { font-style: italic; color: var(--muted); }
+.testi-card h4 { margin-top: 20px; font-weight: 600; }
+
+/* REVIEW FORM STYLES */
+.review-form-section { padding: 50px 10%; background: #fdfcf8; border-top: 1px solid #eee; }
+.review-form-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.star-rating input { display: none; }
+.star-rating label { font-size: 30px; color: #ddd; cursor: pointer; transition: 0.2s; }
+.star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: var(--accent); }
+.btn-submit-review {
+    background: var(--text);
+    color: white;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+.btn-submit-review:hover { background: var(--accent); }
+
+/* ===== RESERVATION FORM ===== */
+.reservation-section {
+    background: #fcfcfc;
+    padding: 100px 10%;
+}
+.res-form-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+}
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px; }
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: inherit;
+}
+.btn-wa {
+    background: #25d366;
+    color: white;
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+.btn-wa:hover { background: #128c7e; transform: translateY(-3px); }
+
+/* ===== FAQ SECTION ===== */
+.faq-container { max-width: 800px; margin: 0 auto; }
+.faq-item { background: #fff; margin-bottom: 15px; padding: 20px; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+.faq-item:hover { background: #fdfcf8; }
+.faq-question { font-weight: 600; display: flex; justify-content: space-between; align-items: center; font-size: 16px; }
+.faq-answer { margin-top: 15px; color: var(--muted); font-size: 14px; display: none; border-top: 1px solid #eee; padding-top: 15px; }
+
+/* ===== BACK TO TOP ===== */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: var(--accent);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+#backToTop:hover { transform: translateY(-5px); background: #967532; }
+
+/* ===== CONTACT SECTION ===== */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    background: var(--dark-bg);
+    color: #fff;
+    padding: 60px;
+    border-radius: 20px;
+}
+.contact-info h3 { font-family: 'Playfair Display', serif; font-size: 32px; margin-bottom: 30px; }
+.contact-item { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 25px; }
+.contact-item i { color: var(--accent); font-size: 20px; margin-top: 5px; }
+.contact-item p { margin: 0; color: #ccc; }
+
+/* ===== FOOTER ===== */
+footer { padding: 50px 10%; background: #111; color: #777; text-align: center; }
+.social-links { margin-bottom: 20px; }
+.social-links a { color: #fff; font-size: 20px; margin: 0 15px; transition: 0.3s; }
+.social-links a:hover { color: var(--accent); }
+
+@media(max-width:900px){
+    nav { padding: 15px 30px; }
+    .hero-content h1 { font-size: 48px; }
+    .about-grid, .contact-container { grid-template-columns: 1fr; padding: 30px; }
+    .about-image img { box-shadow: 10px 10px 0 var(--accent); }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div id="backToTop" onclick="scrollToTop()"><i class="fa-solid fa-arrow-up"></i></div>
+
+<nav id="nav">
+  <div class="logo-container">
+      <div class="logo-icon"><i class="fa-solid fa-utensils"></i></div>
+      <div class="logo-text">SELASAR <span style="color:var(--accent)">NUSANTARA BU YANI</span></div>
+  </div>
+  <div class="links">
+    <a href="#">Beranda</a>
+    <a href="#about">Tentang Kami</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Galeri</a>
+    <a href="#reservation">Reservasi</a>
+    <a href="#faq">FAQ</a>
+    <a href="#contact">Kontak</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p style="letter-spacing: 4px; font-weight: 500;">AUTHENTIC INDONESIAN CUISINE</p>
+    <h1>Cita Rasa Warisan<br><span style="color:var(--accent)">Leluhur.</span></h1>
+    <p>Menyajikan kelezatan otentik dari seluruh pelosok Nusantara dengan sentuhan modern dan bahan-bahan organik pilihan kualitas terbaik.</p>
+    <a href="#menu" style="background:var(--accent); color:#fff; padding: 15px 35px; text-decoration:none; border-radius:4px; font-weight:600;">LIHAT MENU</a>
+  </div>
+</section>
+
+<section id="about" class="section" style="padding: 100px 10%;">
+    <div class="about-grid fade">
+        <div class="about-image">
+            <img src="gambar5.jpg" alt="Tentang Kami">
+        </div>
+        <div class="about-text">
+            <h2>Tentang Selasar Nusantara</h2>
+            <p>Berdiri sejak tahun 2006, Selasar Nusantara Bu Yani lahir dari gairah untuk melestarikan kekayaan kuliner Indonesia yang tak ternilai. Kami percaya bahwa makanan adalah bahasa universal yang menceritakan sejarah dan budaya suatu bangsa.</p>
+            <p>Setiap bumbu yang kami gunakan ditumbuk secara tradisional, dan setiap daging dipilih dari peternakan lokal terbaik. Kami berkomitmen untuk menghadirkan pengalaman makan premium yang membawa Anda berkeliling Nusantara dalam satu meja.</p>
+            <p><strong>Filosofi Kami:</strong> Kejujuran bahan, ketulusan rasa, dan keramahan khas Indonesia.</p>
+        </div>
+    </div>
+</section>
+
+<section id="menu" class="section" style="padding: 80px 10%;">
+    <div class="section-title">
+        <h2>Menu Unggulan</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="menu-grid">
+        <div class="menu-card fade">
+            <img src="rendang.jpg" class="menu-img" alt="Rendang">
+            <div class="menu-info">
+                <h3>Rendang Minang</h3>
+                <p>Daging sapi wagyu yang dimasak perlahan selama 8 jam dengan 21 rempah rahasia khas Sumatera Barat.</p>
+                <div class="menu-footer"><span class="price">Rp 125.000</span><i class="fa-solid fa-star" style="color:var(--accent)"></i></div>
+            </div>
+        </div>
+
+        <div class="menu-card fade">
+            <img src="sate.jpg" class="menu-img" alt="Sate Ayam">
+            <div class="menu-info">
+                <h3>Sate Ayam Madura</h3>
+                <p>Potongan dada ayam pilihan dengan baluran saus kacang sangrai yang gurih dan aroma smokey yang kuat.</p>
+                <div class="menu-footer"><span class="price">Rp 65.000</span><i class="fa-solid fa-star" style="color:var(--accent)"></i></div>
+            </div>
+        </div>
+
+        <div class="menu-card fade">
+            <img src="gudeg.jpeg" class="menu-img" alt="Gado Gado">
+            <div class="menu-info">
+                <h3>Nasi Gudeg Jogja</h3>
+                <p>Sajian legendaris nangka muda yang dimasak perlahan dengan santan kental dan gula aren selama belasan jam, menghasilkan tekstur lembut dengan cita rasa manis-gurih yang meresap hingga ke dalam.</p>
+                <div class="menu-footer"><span class="price">Rp 55.000</span><i class="fa-solid fa-leaf" style="color:green"></i></div>
+            </div>
+        </div>
+
+        <div class="menu-card fade">
+            <img src="soto.jpg" class="menu-img" alt="Soto Betawi">
+            <div class="menu-info">
+                <h3>Soto Betawi</h3>
+                <p>Kuah santan kental yang gurih dengan potongan daging sapi lembut, paru goreng, dan emping melinjo.</p>
+                <div class="menu-footer"><span class="price">Rp 75.000</span><i class="fa-solid fa-bowl-food" style="color:var(--accent)"></i></div>
+            </div>
+        </div>
+
+        <div class="menu-card fade">
+            <img src="pempek.jpg" class="menu-img" alt="Pempek">
+            <div class="menu-info">
+                <h3>Pempek Palembang</h3>
+                <p>Terbuat dari ikan tenggiri segar dengan cuko hitam kental pedas asam yang sangat autentik.</p>
+                <div class="menu-footer"><span class="price">Rp 48.000</span><i class="fa-solid fa-fish" style="color:var(--accent)"></i></div>
+            </div>
+        </div>
+
+        <div class="menu-card fade">
+            <img src="nasgorspesial.png" class="menu-img" alt="Nasi Goreng">
+            <div class="menu-info">
+                <h3>Nasi Goreng Nusantara</h3>
+                <p>Nasi goreng rempah dengan topping ayam goreng, telur mata sapi, sate ayam, dan kerupuk udang.</p>
+                <div class="menu-footer"><span class="price">Rp 58.000</span><i class="fa-solid fa-fire" style="color:orange"></i></div>
+            </div>
+        </div>
+
+        <div class="menu-card fade">
+            <img src="ayambetutu.png" class="menu-img" alt="Ayam Betutu">
+            <div class="menu-info">
+                <h3>Ayam Betutu Bali</h3>
+                <p>Ayam utuh yang dibumbui base genep khas Bali, dimasak perlahan hingga bumbu meresap dan tekstur sangat lembut.</p>
+                <div class="menu-footer"><span class="price">Rp 115.000</span><i class="fa-solid fa-pepper-hot" style="color:red"></i></div>
+            </div>
+        </div>
+
+        <div class="menu-card fade">
+            <img src="rawoniga.jpg" class="menu-img" alt="Rawon">
+            <div class="menu-info">
+                <h3>Rawon Spesial</h3>
+                <p>Sup daging hitam legendaris Jawa Timur dengan kluwek pilihan, disajikan dengan telur asin dan sambal terasi.</p>
+                <div class="menu-footer"><span class="price">Rp 95.000</span><i class="fa-solid fa-bowl-rice" style="color:var(--accent)"></i></div>
+            </div>
+        </div>
+
+        <div class="menu-card fade">
+            <img src="seisapi.jpg" class="menu-img" alt="Es Teler">
+            <div class="menu-info">
+                <h3>Se'i Sapi Asap Timor</h3>
+                <p>Daging sapi pilihan yang diiris tipis dan diolah melalui proses pengasapan tradisional menggunakan kayu kosambi, menghasilkan aroma smokey yang khas dengan tekstur daging yang tetap juicy dan lembut.</p>
+                <div class="menu-footer"><span class="price">Rp 85.000</span><i class="fa-solid fa-ice-cream" style="color:pink"></i></div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<div class="modal-overlay" id="menuModal">
+    <div class="modal-content">
+        <div class="modal-close" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></div>
+        <div class="modal-body" id="modalBody">
+            </div>
+    </div>
+</div>
+
+<section id="gallery" style="padding: 100px 10%;">
+    <div class="section-title">
+        <h2>Galeri Restoran</h2>
+        <div class="line"></div>
+    </div>
+    <div class="gallery-grid fade">
+        <div class="gallery-item"><img src="gambar3.png"></div>
+        <div class="gallery-item"><img src="gambar2.png"></div>
+        <div class="gallery-item"><img src="gambar4.jpg"></div>
+        <div class="gallery-item"><img src="gambar6.jpg"></div>
+    </div>
+</section>
+
+<section id="testimonials" style="padding: 100px 10%; background: #fdfcf8;">
+    <div class="section-title">
+        <h2>Ulasan Pelanggan</h2>
+        <div class="line"></div>
+    </div>
+    <div class="testi-container fade" id="testi-container">
+        <div class="testi-card">
+            <i class="fa-solid fa-quote-left"></i>
+            <p>"Rendangnya terbaik di Jakarta! Teksturnya sangat lembut dan bumbunya benar-benar meresap. Tempat yang sangat cocok untuk menjamu tamu."</p>
+            <h4>— Andi Wijaya</h4>
+        </div>
+        <div class="testi-card">
+            <i class="fa-solid fa-quote-left"></i>
+            <p>"Pelayanan luar biasa ramah. Suasana interiornya sangat kental dengan nuansa Nusantara namun tetap terlihat modern dan mewah."</p>
+            <h4>— Sarah Wijayanti</h4>
+        </div>
+        <div class="testi-card">
+            <i class="fa-solid fa-quote-left"></i>
+            <p>"Soto Betawinya juara! Kuahnya gurih dan potongan dagingnya melimpah. Pasti akan kembali lagi bersama keluarga."</p>
+            <h4>— Budi Santoso</h4>
+        </div>
+    </div>
+</section>
+
+<section class="review-form-section">
+    <div class="review-form-container fade">
+        <h3 style="text-align: center; font-family: 'Playfair Display', serif; margin-bottom: 20px;">Berikan Ulasan Anda</h3>
+        <div class="star-rating">
+            <input type="radio" id="star5" name="rating" value="5"><label for="star5"><i class="fa-solid fa-star"></i></label>
+            <input type="radio" id="star4" name="rating" value="4"><label for="star4"><i class="fa-solid fa-star"></i></label>
+            <input type="radio" id="star3" name="rating" value="3"><label for="star3"><i class="fa-solid fa-star"></i></label>
+            <input type="radio" id="star2" name="rating" value="2"><label for="star2"><i class="fa-solid fa-star"></i></label>
+            <input type="radio" id="star1" name="rating" value="1"><label for="star1"><i class="fa-solid fa-star"></i></label>
+        </div>
+        <div class="form-group">
+            <input type="text" id="rev_name" placeholder="Nama Anda">
+        </div>
+        <div class="form-group">
+            <textarea id="rev_text" style="width:100%; padding:15px; border-radius:8px; border:1px solid #ddd; font-family:inherit;" rows="4" placeholder="Ceritakan pengalaman kuliner Anda..."></textarea>
+        </div>
+        <button class="btn-submit-review" onclick="addReview()">Kirim Ulasan</button>
+    </div>
+</section>
+
+<section id="reservation" class="reservation-section">
+    <div class="section-title">
+        <h2>Reservasi Meja</h2>
+        <div class="line"></div>
+        <p style="margin-top: 15px; color: var(--muted);">Pesan meja Anda sekarang dengan cepat melalui WhatsApp</p>
+    </div>
+    <div class="res-form-container fade">
+        <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" id="res_name" placeholder="Contoh: Budi Santoso">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label>Tanggal</label>
+                <input type="date" id="res_date">
+            </div>
+            <div class="form-group">
+                <label>Jam</label>
+                <input type="time" id="res_time">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Jumlah Tamu</label>
+            <select id="res_guests">
+                <option value="1-2 Orang">1-2 Orang</option>
+                <option value="3-4 Orang">3-4 Orang</option>
+                <option value="5-8 Orang">5-8 Orang</option>
+                <option value="Di atas 8 Orang">Di atas 8 Orang</option>
+            </select>
+        </div>
+        <button onclick="sendToWA()" class="btn-wa">
+            <i class="fa-brands fa-whatsapp"></i> Kirim ke WhatsApp
+        </button>
+    </div>
+</section>
+
+<section id="faq" style="padding: 100px 10%; background: #fff;">
+    <div class="section-title">
+        <h2>Pertanyaan Umum</h2>
+        <div class="line"></div>
+    </div>
+    <div class="faq-container fade">
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <div class="faq-question">Apakah makanan di sini 100% Halal? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Ya, seluruh menu di Selasar Nusantara menggunakan bahan-bahan bersertifikat Halal dan tidak mengandung babi atau alkohol.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <div class="faq-question">Apakah ada area parkir khusus? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Kami menyediakan area parkir yang luas dan fasilitas Valet Parking gratis bagi setiap tamu restoran kami.</div>
+        </div>
+        <div class="faq-item" onclick="toggleFAQ(this)">
+            <div class="faq-question">Apakah bisa memesan tempat untuk acara ulang tahun? <i class="fa-solid fa-chevron-down"></i></div>
+            <div class="faq-answer">Tentu! Kami memiliki ruang VIP dan paket khusus acara (ulang tahun, meeting, atau lamaran). Silakan hubungi admin via WhatsApp untuk detailnya.</div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" style="padding: 100px 10%; background: #f9f9f9;">
+    <div class="contact-container fade">
+        <div class="contact-info">
+            <h3>Hubungi Kami</h3>
+            <div class="contact-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                    <strong>Lokasi:</strong>
+                    <p>Jl. Senopati No. 45, Kebayoran Baru, Jakarta Selatan, 12110</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                    <strong>Telepon:</strong>
+                    <p>(021) 889-1234 / 0812-3456-7890</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <div>
+                    <strong>Email:</strong>
+                    <p>info@selasarnusantara.com</p>
+                </div>
+            </div>
+            <div class="contact-item">
+                <i class="fa-solid fa-clock"></i>
+                <div>
+                    <strong>Jam Operasional:</strong>
+                    <p>Setiap Hari: 10.00 - 22.00 WIB</p>
+                </div>
+            </div>
+        </div>
+        <div style="border-radius: 15px; overflow: hidden; height: 100%;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.262524451703!2d106.80665391107563!3d-6.229074893733973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1503923304b%3A0x600c0f91b7d72855!2sJl.%20Senopati%2C%20Kby.%20Baru%2C%20Kota%20Jakarta%20Selatan%2C%20Daerah%20Khusus%20Ibukota%20Jakarta!5e0!3m2!1sid!2sid!4v1709400000000!5m2!1sid!2sid" width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="social-links">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
+    </div>
+    <p>© 2026 Selasar Nusantara Bu Yani. Dibuat dengan cinta untuk Kuliner Indonesia.</p>
+</footer>
+
+<script>
+window.addEventListener('scroll', () => {
+    const nav = document.getElementById('nav');
+    const btt = document.getElementById('backToTop');
+    
+    if (window.scrollY > 80) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+
+    if (window.scrollY > 400) {
+        btt.style.display = "flex";
+    } else {
+        btt.style.display = "none";
+    }
+});
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = "translateY(0)";
+        }
+    });
+}, { threshold: 0.1 });
+
+function initObserver() {
+    document.querySelectorAll('.fade').forEach(el => {
+        el.style.opacity = 0;
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "1s ease-out";
+        observer.observe(el);
+    });
+}
+initObserver();
+
+// MENU POP-UP LOGIC
+document.querySelectorAll('.menu-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const img = card.querySelector('img').src;
+        const title = card.querySelector('h3').innerText;
+        const desc = card.querySelector('p').innerText;
+        const price = card.querySelector('.price').innerText;
+
+        document.getElementById('modalBody').innerHTML = `
+            <img src="${img}" alt="${title}">
+            <div class="modal-details">
+                <h3>${title}</h3>
+                <span class="price">${price}</span>
+                <p style="color:var(--muted)">${desc}</p>
+                <button onclick="closeModal()" style="background:var(--accent); color:white; border:none; padding:10px 25px; border-radius:5px; cursor:pointer; margin-top:10px;">Tutup Detail</button>
+            </div>
+        `;
+        document.getElementById('menuModal').style.display = 'flex';
+    });
+});
+
+function closeModal() {
+    document.getElementById('menuModal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == document.getElementById('menuModal')) {
+        closeModal();
+    }
+}
+
+// INTERACTIVE REVIEW LOGIC
+function addReview() {
+    const name = document.getElementById('rev_name').value;
+    const text = document.getElementById('rev_text').value;
+    const ratingInput = document.querySelector('input[name="rating"]:checked');
+
+    if (!name || !text || !ratingInput) {
+        alert("Mohon lengkapi nama, ulasan, dan rating bintang Anda!");
+        return;
+    }
+
+    const ratingValue = ratingInput.value;
+    const container = document.getElementById('testi-container');
+    
+    const newCard = document.createElement('div');
+    newCard.className = 'testi-card';
+    newCard.style.opacity = '0';
+    newCard.style.transform = 'translateY(20px)';
+    newCard.style.transition = '0.6s ease-out';
+    
+    let starsHtml = '';
+    for(let i=0; i<ratingValue; i++) {
+        starsHtml += '<i class="fa-solid fa-star" style="font-size:14px; margin: 0 2px;"></i>';
+    }
+
+    newCard.innerHTML = `
+        <i class="fa-solid fa-quote-left"></i>
+        <p>"${text}"</p>
+        <div style="color:var(--accent); margin-bottom:10px;">${starsHtml}</div>
+        <h4>— ${name}</h4>
+    `;
+
+    container.prepend(newCard);
+
+    setTimeout(() => {
+        newCard.style.opacity = '1';
+        newCard.style.transform = 'translateY(0)';
+    }, 100);
+
+    // Reset Form
+    document.getElementById('rev_name').value = "";
+    document.getElementById('rev_text').value = "";
+    ratingInput.checked = false;
+
+    // Scroll to new review
+    document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' });
+}
+
+// WHATSAPP RESERVATION LOGIC
+function sendToWA() {
+    const name = document.getElementById('res_name').value;
+    const date = document.getElementById('res_date').value;
+    const time = document.getElementById('res_time').value;
+    const guests = document.getElementById('res_guests').value;
+
+    if (name === "" || date === "" || time === "") {
+        alert("Mohon lengkapi semua data reservasi!");
+        return;
+    }
+
+    const phoneNumber = "6281234567890"; 
+    const message = `Halo Selasar Nusantara, saya ingin melakukan reservasi:%0A%0A*Nama:* ${name}%0A*Tanggal:* ${date}%0A*Jam:* ${time}%0A*Jumlah Tamu:* ${guests}%0A%0AMohon konfirmasinya, terima kasih.`;
+    
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+}
+
+function toggleFAQ(element) {
+    const answer = element.querySelector('.faq-answer');
+    const icon = element.querySelector('i');
+    if (answer.style.display === "block") {
+        answer.style.display = "none";
+        icon.style.transform = "rotate(0deg)";
+    } else {
+        answer.style.display = "block";
+        icon.style.transform = "rotate(180deg)";
+    }
+}
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
